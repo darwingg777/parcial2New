@@ -14,7 +14,7 @@
                 <div class="card bg-dark border-cyan stat-card">
                   <div class="card-body text-center">
                     <h3 class="display-4 text-cyan mb-0">{{ productos.length }}</h3>
-                    <p class="text-muted mb-0">Productos</p>
+                    <p class="text-cyan mb-0">Productos</p>
                   </div>
                 </div>
               </div>
@@ -22,7 +22,7 @@
                 <div class="card bg-dark border-cyan stat-card">
                   <div class="card-body text-center">
                     <h3 class="display-4 text-cyan mb-0">2075</h3>
-                    <p class="text-muted mb-0">Año Tech</p>
+                    <p class="text-cyan mb-0">Año Tech</p>
                   </div>
                 </div>
               </div>
@@ -30,7 +30,7 @@
                 <div class="card bg-dark border-cyan stat-card">
                   <div class="card-body text-center">
                     <h3 class="display-4 text-cyan mb-0">∞</h3>
-                    <p class="text-muted mb-0">Innovación</p>
+                    <p class="text-cyan mb-0">Innovación</p>
                   </div>
                 </div>
               </div>
@@ -46,7 +46,7 @@
             <h2 class="display-4 fw-bold mb-3">
               <span class="gradient-text">Catálogo Futurista</span>
             </h2>
-            <p class="lead text-muted">Productos que cambiarán tu realidad</p>
+            <p class="lead text-cyan">Productos que cambiarán tu realidad</p>
           </div>
 
           <!-- Loading Spinner -->
@@ -61,6 +61,9 @@
           <div v-else-if="error" class="alert alert-danger text-center" role="alert">
             <h4 class="alert-heading">Error al cargar productos</h4>
             <p>{{ error }}</p>
+            <button class="btn btn-cyan mt-3" @click="cargarProductos">
+              Reintentar
+            </button>
           </div>
 
           <!-- Products Grid -->
@@ -76,6 +79,7 @@
                   />
                   <div class="card-img-overlay d-flex align-items-start justify-content-between p-3">
                     <span class="badge bg-cyan text-dark fw-bold">ID: {{ String(product.id).padStart(4, '0') }}</span>
+                    <span class="badge bg-gradient-purple text-white fw-bold text-uppercase">{{ product.category }}</span>
                   </div>
                   <div class="corner-decor corner-tl"></div>
                   <div class="corner-decor corner-tr"></div>
@@ -84,10 +88,10 @@
                 </div>
                 <div class="card-body d-flex flex-column bg-dark-gradient">
                   <h5 class="card-title fw-bold text-white mb-3">{{ product.name }}</h5>
-                  <p class="card-text text-muted flex-grow-1 small">{{ product.description }}</p>
+                  <p class="card-text text-cyan flex-grow-1 small">{{ product.description }}</p>
                   <div class="d-flex justify-content-between align-items-center mt-3 pt-3 border-top border-secondary">
                     <div>
-                      <small class="text-muted d-block text-uppercase" style="font-size: 0.7rem;">Precio</small>
+                      <small class="text-cyan d-block text-uppercase" style="font-size: 0.7rem;">Precio</small>
                       <span class="h4 text-cyan fw-bold mb-0">{{ product.price }}</span>
                     </div>
                     <button class="btn btn-cyan btn-futuristic">
@@ -103,8 +107,8 @@
           <!-- Empty State -->
           <div v-if="!loading && !error && productos.length === 0" class="text-center py-5">
             <div class="display-1 mb-3">🔍</div>
-            <h3 class="text-muted">No hay productos disponibles</h3>
-            <p class="text-muted">Por favor, verifica que el archivo products.json esté disponible.</p>
+            <h3 class="text-cyan">No hay productos disponibles</h3>
+            <p class="text-cyan">Aún no se han agregado productos a la tienda.</p>
           </div>
         </div>
       </section>
@@ -115,9 +119,9 @@
 </template>
 
 <script>
-import productsData from "@/assets/products.json";
 import FooterComponent from "@/components/FooterComponent.vue";
 import HeaderComponent from "@/components/HeaderComponent.vue";
+import apiService from "@/services/apiService";
 import { onMounted, ref } from "vue";
 
 export default {
@@ -131,21 +135,26 @@ export default {
     const loading = ref(true);
     const error = ref(null);
 
-    const cargarProductos = () => {
+    const cargarProductos = async () => {
       try {
         loading.value = true;
         error.value = null;
         
-        console.log('Datos cargados:', productsData); // Para debug
+        console.log('Cargando productos desde la API...');
         
-        // Verificar si los datos vienen en el formato correcto
-        productos.value = productsData.products || productsData || [];
+        // Llamada a la API usando el servicio
+        const response = await apiService.products.getAllProducts();
         
-        console.log('Productos:', productos.value); // Para debug
+        console.log('Respuesta de la API:', response.data);
+        
+        // Asignar los productos
+        productos.value = response.data;
+        
+        console.log('Productos cargados:', productos.value.length);
         
       } catch (err) {
         console.error("Error cargando productos:", err);
-        error.value = `No se pudieron cargar los productos: ${err.message}`;
+        error.value = `No se pudieron cargar los productos desde la API. ${err.message}`;
       } finally {
         loading.value = false;
       }
@@ -153,6 +162,7 @@ export default {
 
     const handleImageError = (event) => {
       event.target.src = 'https://via.placeholder.com/400x250/1a1f3a/00f2ff?text=Imagen+No+Disponible';
+      console.log('Imagen no disponible, se ha establecido una imagen por defecto.');
     };
 
     onMounted(() => {
@@ -163,7 +173,8 @@ export default {
       productos,
       loading,
       error,
-      handleImageError
+      handleImageError,
+      cargarProductos
     };
   },
 };
@@ -187,6 +198,10 @@ export default {
 
 .border-cyan {
   border-color: #00f2ff !important;
+}
+
+.bg-gradient-purple {
+  background: linear-gradient(45deg, #8b5cf6, #ec4899);
 }
 
 /* Hero Section */
@@ -389,6 +404,13 @@ export default {
 .spinner-border.text-cyan {
   border-color: #00f2ff;
   border-right-color: transparent;
+}
+
+/* Alert */
+.alert-danger {
+  background: rgba(220, 53, 69, 0.1);
+  border: 1px solid rgba(220, 53, 69, 0.5);
+  color: #ff6b6b;
 }
 
 /* Responsive */
