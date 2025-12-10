@@ -20,7 +20,7 @@
         <li class="nav-item mb-2">
           <router-link class="nav-link" to="/productos">
             <span class="nav-icon">🚀</span>
-            <span class="nav-text">Productos</span>
+            <span class="nav-text">Editar Productos</span>
             <span class="nav-indicator"></span>
           </router-link>
         </li>
@@ -46,11 +46,11 @@
           </a>
         </li>
         <li class="nav-item mb-2">
-          <a class="nav-link" href="#">
+          <router-link to="/clientes" class="nav-link">
             <span class="nav-icon">👥</span>
             <span class="nav-text">Clientes</span>
             <span class="nav-indicator"></span>
-          </a>
+          </router-link>
         </li>
         <li class="nav-item mb-2">
           <a class="nav-link" href="#">
@@ -67,9 +67,7 @@
             <div class="mb-2 fs-3">🎯</div>
             <p class="small mb-2 fw-bold text-cyan">Pro Version</p>
             <p class="small text-muted mb-3">Desbloquea todas las funciones</p>
-            <button class="btn btn-sm btn-cyan w-100">
-              Actualizar
-            </button>
+            <button class="btn btn-sm btn-cyan w-100">Actualizar</button>
           </div>
         </div>
       </div>
@@ -79,7 +77,7 @@
 
 <script>
 export default {
-  name: "SidebarComponent"
+  name: "SidebarComponent",
 };
 </script>
 
@@ -123,7 +121,8 @@ export default {
 }
 
 @keyframes pulse {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(1);
     filter: drop-shadow(0 0 5px #00f2ff);
   }
@@ -189,7 +188,11 @@ export default {
 
 .nav-link.active,
 .nav-link.router-link-active {
-  background: linear-gradient(90deg, rgba(0, 242, 255, 0.15), rgba(255, 0, 255, 0.05));
+  background: linear-gradient(
+    90deg,
+    rgba(0, 242, 255, 0.15),
+    rgba(255, 0, 255, 0.05)
+  );
   border-color: #00f2ff;
   box-shadow: 0 4px 15px rgba(0, 242, 255, 0.2);
 }
@@ -263,7 +266,7 @@ export default {
     border-right: none;
     border-bottom: 2px solid rgba(0, 242, 255, 0.3);
   }
-  
+
   .sidebar-sticky {
     padding-top: 0;
   }

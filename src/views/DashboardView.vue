@@ -17,9 +17,9 @@
                   <div class="row align-items-center">
                     <div class="col-lg-8">
                       <h1 class="display-5 fw-bold mb-3 gradient-text">
-                        Bienvenido {{ usuario || 'Administrador' }} 👋
+                        Bienvenido {{ usuario || "Administrador" }} 👋
                       </h1>
-                      <p class="lead text-muted mb-0">
+                      <p class="lead text-info mb-0">
                         Panel de control - DigiStore Management System
                       </p>
                     </div>
@@ -42,7 +42,9 @@
                 <div class="card-body">
                   <div class="d-flex justify-content-between align-items-start">
                     <div>
-                      <p class="text-muted mb-2 text-uppercase small">Total Productos</p>
+                      <p class="text-info mb-2 text-uppercase small">
+                        Total Productos
+                      </p>
                       <h2 class="fw-bold mb-0 text-cyan">12</h2>
                       <small class="text-success">
                         <i>↑</i> +8% vs mes anterior
@@ -61,7 +63,9 @@
                 <div class="card-body">
                   <div class="d-flex justify-content-between align-items-start">
                     <div>
-                      <p class="text-muted mb-2 text-uppercase small">Ventas Totales</p>
+                      <p class="text-info mb-2 text-uppercase small">
+                        Ventas Totales
+                      </p>
                       <h2 class="fw-bold mb-0 text-success">$285K</h2>
                       <small class="text-success">
                         <i>↑</i> +15% este mes
@@ -80,11 +84,11 @@
                 <div class="card-body">
                   <div class="d-flex justify-content-between align-items-start">
                     <div>
-                      <p class="text-muted mb-2 text-uppercase small">Clientes</p>
+                      <p class="text-info mb-2 text-uppercase small">
+                        Clientes
+                      </p>
                       <h2 class="fw-bold mb-0 text-purple">1,247</h2>
-                      <small class="text-success">
-                        <i>↑</i> +23 nuevos
-                      </small>
+                      <small class="text-success"> <i>↑</i> +23 nuevos </small>
                     </div>
                     <div class="stat-icon bg-purple-glow">
                       <span>👥</span>
@@ -99,11 +103,11 @@
                 <div class="card-body">
                   <div class="d-flex justify-content-between align-items-start">
                     <div>
-                      <p class="text-muted mb-2 text-uppercase small">Pedidos Hoy</p>
+                      <p class="text-info mb-2 text-uppercase small">
+                        Pedidos Hoy
+                      </p>
                       <h2 class="fw-bold mb-0 text-warning">47</h2>
-                      <small class="text-warning">
-                        <i>→</i> En proceso
-                      </small>
+                      <small class="text-warning"> <i>→</i> En proceso </small>
                     </div>
                     <div class="stat-icon bg-warning-glow">
                       <span>🚚</span>
@@ -130,8 +134,12 @@
                       <div class="d-flex align-items-center">
                         <span class="action-icon me-3">🚀</span>
                         <div>
-                          <div class="fw-bold">Agregar Producto</div>
-                          <small class="text-muted">Añadir nuevo producto al catálogo</small>
+                          <router-link class="nav-link px-3" to="/products/new">
+                            <div class="fw-bold">Agregar Nuevo Producto</div>
+                          </router-link>
+                          <small class="text-info"
+                            >Añadir nuevo producto al catálogo</small
+                          >
                         </div>
                       </div>
                     </button>
@@ -140,7 +148,9 @@
                         <span class="action-icon me-3">📊</span>
                         <div>
                           <div class="fw-bold">Ver Reportes</div>
-                          <small class="text-muted">Análisis de ventas y métricas</small>
+                          <small class="text-info"
+                            >Análisis de ventas y métricas</small
+                          >
                         </div>
                       </div>
                     </button>
@@ -149,7 +159,9 @@
                         <span class="action-icon me-3">⚙️</span>
                         <div>
                           <div class="fw-bold">Configuración</div>
-                          <small class="text-muted">Ajustar preferencias del sistema</small>
+                          <small class="text-info"
+                            >Ajustar preferencias del sistema</small
+                          >
                         </div>
                       </div>
                     </button>
@@ -172,28 +184,36 @@
                       <div class="activity-icon bg-success-glow">✓</div>
                       <div class="activity-content">
                         <p class="mb-1 fw-semibold">Venta completada</p>
-                        <small class="text-muted">Neural Glasses VR - Hace 5 min</small>
+                        <small class="text-info"
+                          >Neural Glasses VR - Hace 5 min</small
+                        >
                       </div>
                     </div>
                     <div class="activity-item">
                       <div class="activity-icon bg-cyan-glow">+</div>
                       <div class="activity-content">
                         <p class="mb-1 fw-semibold">Nuevo producto agregado</p>
-                        <small class="text-muted">Quantum Watch X - Hace 1 hora</small>
+                        <small class="text-info"
+                          >Quantum Watch X - Hace 1 hora</small
+                        >
                       </div>
                     </div>
                     <div class="activity-item">
                       <div class="activity-icon bg-warning-glow">⚠</div>
                       <div class="activity-content">
                         <p class="mb-1 fw-semibold">Stock bajo</p>
-                        <small class="text-muted">Tesla Hoverboard Pro - Hace 2 horas</small>
+                        <small class="text-info"
+                          >Tesla Hoverboard Pro - Hace 2 horas</small
+                        >
                       </div>
                     </div>
                     <div class="activity-item">
                       <div class="activity-icon bg-purple-glow">👤</div>
                       <div class="activity-content">
                         <p class="mb-1 fw-semibold">Nuevo cliente registrado</p>
-                        <small class="text-muted">cliente_2075@mail.com - Hace 3 horas</small>
+                        <small class="text-info"
+                          >cliente_2075@mail.com - Hace 3 horas</small
+                        >
                       </div>
                     </div>
                   </div>
@@ -208,23 +228,23 @@
 </template>
 
 <script>
-import HeaderComponent from '@/components/HeaderComponent.vue';
-import SidebarComponent from '@/components/SidebarComponent.vue';
-import { onMounted, ref } from 'vue';
-import { useRouter } from 'vue-router';
+import HeaderComponent from "@/components/HeaderComponent.vue";
+import SidebarComponent from "@/components/SidebarComponent.vue";
+import { onMounted, ref } from "vue";
+import { useRouter } from "vue-router";
 
 export default {
-  name: 'DashboardView',
+  name: "DashboardView",
   components: {
     HeaderComponent,
-    SidebarComponent
+    SidebarComponent,
   },
   setup() {
     const router = useRouter();
-    const usuario = ref('');
+    const usuario = ref("");
 
     onMounted(() => {
-      const sesion = localStorage.getItem('logueado');
+      const sesion = localStorage.getItem("logueado");
       if (sesion) {
         const datos = JSON.parse(sesion);
         usuario.value = datos.usuario;
@@ -232,15 +252,15 @@ export default {
     });
 
     const cerrarSesion = () => {
-      localStorage.removeItem('logueado');
-      router.push('/');
+      localStorage.removeItem("logueado");
+      router.push("/");
     };
 
     return {
       usuario,
-      cerrarSesion
+      cerrarSesion,
     };
-  }
+  },
 };
 </script>
 
@@ -282,8 +302,13 @@ export default {
 }
 
 @keyframes gradientShift {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
 }
 
 /* Stat Cards */
@@ -295,10 +320,18 @@ export default {
   animation-fill-mode: both;
 }
 
-.stat-card:nth-child(1) { animation-delay: 0.1s; }
-.stat-card:nth-child(2) { animation-delay: 0.2s; }
-.stat-card:nth-child(3) { animation-delay: 0.3s; }
-.stat-card:nth-child(4) { animation-delay: 0.4s; }
+.stat-card:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.stat-card:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.stat-card:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.stat-card:nth-child(4) {
+  animation-delay: 0.4s;
+}
 
 @keyframes fadeInUp {
   from {
@@ -427,7 +460,7 @@ export default {
 /* Buttons */
 .btn-cyan {
   background: linear-gradient(45deg, #00f2ff, #00c8d4);
-  color: #0a0e27;
+  color: #ffffff;
   border: none;
   font-weight: bold;
   transition: all 0.3s ease;
@@ -437,7 +470,7 @@ export default {
   background: linear-gradient(45deg, #00c8d4, #00f2ff);
   transform: translateY(-2px);
   box-shadow: 0 10px 25px rgba(0, 242, 255, 0.4);
-  color: #0a0e27;
+  color: #ffffff;
 }
 
 .btn-outline-cyan {
@@ -456,7 +489,7 @@ export default {
   .display-5 {
     font-size: 2rem;
   }
-  
+
   .stat-icon {
     width: 50px;
     height: 50px;

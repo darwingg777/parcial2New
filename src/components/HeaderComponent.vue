@@ -27,13 +27,20 @@
             </router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link px-3" to="/productos">
+            <router-link class="nav-link px-3" to="/products">
               <i class="me-2">🚀</i>
               Productos
             </router-link>
           </li>
+             
           <li class="nav-item ms-lg-2">
-            <a class="nav-link btn btn-outline-cyan px-4" href="#" @click.prevent="cerrarSesion">
+            <a 
+              class="nav-link btn btn-outline-cyan px-4" 
+              href="#" 
+              @click.prevent="mostrarModalLogout"
+              data-bs-toggle="modal" 
+              data-bs-target="#logoutModal"
+            >
               <i class="me-2">🔒</i>
               Cerrar Sesión
             </a>
@@ -42,10 +49,33 @@
       </div>
     </div>
   </nav>
+
+  <!-- Modal de confirmación de Bootstrap -->
+  <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content futuristic-modal">
+        <div class="modal-header border-0">
+          <h5 class="modal-title" id="logoutModalLabel">
+            <i class="me-2">🔒</i>
+            Cerrar Sesión
+          </h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p class="mb-0">¿Estás seguro de que deseas cerrar sesión?</p>
+        </div>
+        <div class="modal-footer border-0">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-cyan" @click="cerrarSesion">Cerrar Sesión</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
 import { useRouter } from "vue-router";
+import apiService from "@/services/apiService";
 
 export default {
   name: "HeaderComponent",
@@ -53,9 +83,19 @@ export default {
     const router = useRouter();
 
     const cerrarSesion = () => {
-      localStorage.removeItem("sesion");
-      localStorage.removeItem("logueado");
-      router.push("/");
+      
+        // Llama al logout de tu apiService
+        const result = apiService.login.logout();
+        console.log("Logout:", result.message); // "Sesión cerrada"
+        
+        // Redirige
+        router.push("/");
+        
+        // Opcional: Recargar para limpiar estado
+        setTimeout(() => {
+          window.location.reload();
+        }, 100);
+      
     };
 
     return {
@@ -64,7 +104,6 @@ export default {
   },
 };
 </script>
-
 <style scoped>
 .futuristic-navbar {
   background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%);
