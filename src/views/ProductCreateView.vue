@@ -241,10 +241,11 @@
 </template>
 
 <script>
-import { ref } from 'vue'
-import productService from '@/services/productService'
-import { useRouter } from 'vue-router'
-import HeaderComponent from '@/components/HeaderComponent.vue'
+import HeaderComponent from '@/components/HeaderComponent.vue';
+import apiService from '@/services/apiService';
+import { Modal } from 'bootstrap';
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 import { Modal } from 'bootstrap'
 
 export default {
@@ -277,7 +278,7 @@ export default {
           description: formData.value.description || null
         }
         
-        await productService.createProduct(payload)
+        await apiService.products.createProduct(payload)
         
         // Mostrar modal de éxito
         const successModalElement = document.getElementById('successModal')

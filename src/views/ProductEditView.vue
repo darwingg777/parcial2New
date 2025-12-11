@@ -265,10 +265,11 @@
 </template>
 
 <script>
-import HeaderComponent from '@/components/HeaderComponent.vue'
-import productService from '@/services/productService'
-import { Modal } from 'bootstrap'
-import { onMounted, ref } from 'vue'
+import HeaderComponent from '@/components/HeaderComponent.vue';
+import apiService from '@/services/apiService';
+import { Modal } from 'bootstrap';
+import { onMounted, ref } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 import { useRoute, useRouter } from 'vue-router'
 
 export default {
@@ -297,7 +298,7 @@ export default {
       loading.value = true
       error.value = null
       try {
-        const res = await productService.getProductById(id)
+        const res = await apiService.products.getProductById(id)
         product.value = res.data
         
         // Cargar datos en el formulario
@@ -329,7 +330,7 @@ export default {
           description: formData.value.description || null
         }
         
-        await productService.updateProduct(id, payload)
+        await apiService.product.updateProduct(id, payload)
         
         // Mostrar modal de éxito
         const successModalElement = document.getElementById('successModal')

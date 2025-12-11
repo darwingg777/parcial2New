@@ -104,10 +104,11 @@
 </template>
 
 <script>
-import HeaderComponent from '@/components/HeaderComponent.vue'
-import ProductTable from '@/components/ProductTable.vue'
-import productService from '@/services/productService'
-import { onMounted, ref } from 'vue'
+import HeaderComponent from '@/components/HeaderComponent.vue';
+import ProductTable from '@/components/ProductTable.vue';
+import apiService from '@/services/apiService';
+import { onMounted, ref } from 'vue';
+import { useRouter } from 'vue-router';
 import { useRouter } from 'vue-router'
 
 export default {
@@ -122,7 +123,7 @@ export default {
     const load = async () => {
       error.value = null
       try {
-        const res = await productService.getAllProducts()
+        const res = await apiService.products.getAllProducts()
         products.value = res.data
       } catch (err) {
         error.value = 'Error cargando productos'
@@ -142,7 +143,7 @@ export default {
       error.value = null
       success.value = null
       try {
-        await productService.deleteProduct(id)
+        await apiService.productsdeleteProduct(id)
         success.value = 'Producto eliminado correctamente'
         await load()
         setTimeout(() => {
