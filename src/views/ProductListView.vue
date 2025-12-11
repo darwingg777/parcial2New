@@ -106,7 +106,7 @@
 <script>
 import HeaderComponent from '@/components/HeaderComponent.vue'
 import ProductTable from '@/components/ProductTable.vue'
-import productService from '@/services/productService'
+import apiService from '@/services/apiService.js';
 import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
@@ -122,7 +122,7 @@ export default {
     const load = async () => {
       error.value = null
       try {
-        const res = await productService.getAllProducts()
+        const res = await apiService.products.getAllProducts()
         products.value = res.data
       } catch (err) {
         error.value = 'Error cargando productos'
@@ -142,7 +142,7 @@ export default {
       error.value = null
       success.value = null
       try {
-        await productService.deleteProduct(id)
+        await apiService.products.deleteProduct(id)
         success.value = 'Producto eliminado correctamente'
         await load()
         setTimeout(() => {

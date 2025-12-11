@@ -242,7 +242,7 @@
 
 <script>
 import { ref } from 'vue'
-import productService from '@/services/productService'
+import apiService from '@/services/apiService.js'
 import { useRouter } from 'vue-router'
 import HeaderComponent from '@/components/HeaderComponent.vue'
 import { Modal } from 'bootstrap'
@@ -260,8 +260,8 @@ export default {
       name: '',
       price: '',
       category: '',
+      description: '',
       image: '',
-      description: ''
     })
 
     const handleSubmit = async () => {
@@ -277,7 +277,7 @@ export default {
           description: formData.value.description || null
         }
         
-        await productService.createProduct(payload)
+        await apiService.products.createProduct(payload)
         
         // Mostrar modal de éxito
         const successModalElement = document.getElementById('successModal')
